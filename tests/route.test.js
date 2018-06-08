@@ -1,6 +1,8 @@
-var request = require('supertest');
-var should = require('should');
-var app = require('../src/app');
+require('babel-register');
+const request = require('supertest');
+const should = require('should');
+const app = require('../src/app');
+const agent = request.agent(app);
 
 describe('GET /', function () {
     it('response code', function (done) {

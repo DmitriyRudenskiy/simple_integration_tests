@@ -1,18 +1,8 @@
-var express = require('express');
-var app = express();
+import Koa from "koa"
+import router from "./routers/web"
 
-app.get('/', function (req, res) {
-    res.send('Hello World')
-});
+const app = new Koa();
 
-app.get('/api', function(req, res) {
-    res.send({
-        version: '1.0.0'
-    });
-});
-
-app.post('/registration', function(req, res) {
-    res.send({success:true});
-});
+app.use(router.routes());
 
 module.exports = app;
