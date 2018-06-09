@@ -1,10 +1,11 @@
 import Koa from "koa";
 import serve from "koa-static";
-import router from "./routers/web";
+import bodyParser from "koa-bodyparser";
+import router from "./http/routers";
 
 const app = new Koa()
   .use(serve(__dirname + "/../public"))
-  // ... сначала passport потом маршруты
+  .use(bodyParser())
   .use(router.routes())
   .use(router.allowedMethods());
 
@@ -18,3 +19,4 @@ app.use(async (ctx, next) => {
 });
 
 module.exports = app;
+

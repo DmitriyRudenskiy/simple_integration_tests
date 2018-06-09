@@ -1,21 +1,27 @@
-const user = { id: 1, login: 'test', password: 'test' }
+const user = {
+  id: 1,
+  login: "admin",
+  displayName: "Администратор сайта",
+  password: "123",
+  checkPassword: function(password) {
+    return password == this.password;
+  }
+};
 
 const User = {};
 
-User.findOne = function(login) {
-    if (login == user.login) {
-        return user;
-    }
+User.findOne = function(obj) {
+  console.log(obj);
 
-    return null;
+  if (obj.login == user.login) {
+    return user;
+  }
 };
 
 User.findById = function(userId) {
-    if (userId == user.id) {
-        return user;
-    }
-
-    return null;
+  if (userId == user.id) {
+    return user;
+  }
 };
 
 module.exports = User;

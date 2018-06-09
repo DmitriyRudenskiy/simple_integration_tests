@@ -1,4 +1,5 @@
 import Router from "koa-router";
+import AuthController from "./controllers/auth";
 
 const router = new Router();
 
@@ -7,8 +8,9 @@ router.get("/", async ctx => {
 });
 
 router.get("/ping", async ctx => {
-  ctx.body = 'pong';
+  ctx.body = "pong";
 });
 
-module.exports = router;
+router.post("/login", AuthController.signIn);
 
+export default router;
