@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node ./node_modules/.bin/supervisor  src/index.js",
-    "test": "NODE_ENV=testing ./node_modules/.bin/jest --forceExit  tests/*.test.js --forceExit",
+    "test": "NODE_ENV=testing ./node_modules/.bin/jest --forceExit  tests/ping.test.js --forceExit",
     "pretty": "./node_modules/.bin/prettier --write --print-width 80 --single-quote --trailing-comma es5 --tab-width 4 --no-semi 'src/**/*.js' 'tests/**/*.js'"
   },
   "repository": {
@@ -27,9 +27,7 @@
     "koa": "^2.5.1",
     "koa-body": "^4.0.1",
     "koa-bodyparser": "^4.2.1",
-    "koa-passport": "^4.1.0",
     "koa-router": "^7.4.0",
-    "koa-session": "^5.8.1",
     "koa-static": "^4.0.3"
   },
   "devDependencies": {

@@ -1,36 +1,20 @@
-import Koa from "koa"
-import serve from "koa-static"
-//import bodyParser from "koa-bodyparser"
-import router from "./routers/web"
-import passport from "koa-passport"
-import koaBody from "koa-body"
-// import jwt from "./middlewares/jwt"
+import Koa from "koa";
+import serve from "koa-static";
+import router from "./routers/web";
 
 const app = new Koa()
-    .use(serve(__dirname + '/../public'))
-    //.use(bodyParser({ multipart: true }))
-    .use(koaBody({
-        formidable:{uploadDir: __dirname + '/../public'},    //This is where the files would come
-        multipart: true
-    }))
-    .use(passport.initialize()) // сначала passport
-    .use(router.routes()) // потом маршруты
-    .use(router.allowedMethods())
-
-// custom 404
-app.use(async function(ctx, next) {
-    await next();
-    if (ctx.body || !ctx.idempotent) return;
-    ctx.redirect('/404.html');
-});
+  .use(serve(__dirname + "/../public"))
+  // ... сначала passport потом маршруты
+  .use(router.routes())
+  .use(router.allowedMethods());
 
 app.use(async (ctx, next) => {
-    try {
-        await next();
-    } catch (err) {
-        ctx.status = err.status || 500;
-        ctx.message = err.message || "Sorry, an error has occurred.";
-    }
+  try {
+    await next();
+  } catch (err) {
+    ctx.status = err.status || 500;
+    ctx.message = err.message || "Sorry, an error has occurred.";
+  }
 });
 
 module.exports = app;
