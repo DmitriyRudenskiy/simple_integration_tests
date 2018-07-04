@@ -1,8 +1,16 @@
 require('babel-register');
 
 const app = require('./app');
-const PORT = process.env.PORT || 8081;
+const db = require('./models/db');
+const environment = process.env.NODE_ENV || 'development';    // set environment
+const PORT = parseInt(process.env.PORT, 10) || 8081;
 
-app.listen(PORT, function () {
-    console.log('Example app listening on port ' + PORT);
-});
+db.sequelize
+  .sync({ force: true })
+  .then(() => {
+    app.listen(PORT, function () {
+      console.log('Example app listening on port ' + PORT);
+    });
+  }, (err) => {
+    console.log("An error occurred while creating the table:", err);
+  });
